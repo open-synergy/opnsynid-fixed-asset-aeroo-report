@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2021 OpenSynergy Indonesia
+     Copyright 2021 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<openerp>
+<data>
+
+<record id="report_account_fixedAssetXLS" model="ir.actions.report.xml">
+    <field name="name">Fixed Asset XLS</field>
+    <field name="type">ir.actions.report.xml</field>
+    <field name="model">account.asset.asset</field>
+    <field name="report_name">report_fixed_asset_xls</field>
+    <field name="report_type">aeroo</field>
+    <field name="in_format">oo-ods</field>
+    <field name="out_format" ref="report_aeroo.report_mimetypes_xls_odt" />
+    <field
+                name="parser_loc"
+            >fixed_asset_aeroo_report/reports/report_fixed_asset.py</field>
+    <field
+                name="report_rml"
+            >fixed_asset_aeroo_report/reports/report_fixed_asset.ods</field>
+    <field name="parser_state">loc</field>
+    <field name="tml_source">file</field>
+</record>
+
+</data>
+</openerp>
