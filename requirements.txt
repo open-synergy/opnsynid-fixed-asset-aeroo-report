@@ -1,0 +1,2 @@
+# generated from manifests external_dependencies
+git+git://github.com/aeroo/aeroolib@b591d23c98990fc358b02b3b78d46290eadb7277
