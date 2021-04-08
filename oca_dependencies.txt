@@ -13,3 +13,4 @@
 #
 # To provide both the URL and a branch, use:
 aeroo_reports https://github.com/aeroo/aeroo_reports 8.0
+opnsynid_fixed_asset https://github.com/open-synergy/opnsynid-fixed-asset.git 8.0
