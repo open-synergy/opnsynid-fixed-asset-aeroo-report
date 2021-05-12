@@ -29,28 +29,26 @@ class Parser(report_sxw.rml_parse):
         convert_dt = datetime.strptime(self.date, "%Y-%m-%d")
         return convert_dt.strftime("%d %B %Y")
 
-    def get_residual_value(self, asset):
-        remaining_value = 0.0
-        sorted = []
-        filtered = asset.depreciation_line_ids.filtered(
-            lambda x: x.line_date <= self.date and x.init_entry or x.move_check
-        )
+    def get_salvage_value(self, asset):
+        salvage_value = 0.0
 
-        if filtered:
-            sorted = filtered.sorted(key=lambda s: s.line_date, reverse=True)
-            remaining_value = sorted[0].mapped("remaining_value")
+        if asset:
+            salvage_value = asset.salvage_value
 
-        return remaining_value
+        return salvage_value
 
     def get_total_value(self, asset):
         total_value = 0.0
         filtered = asset.depreciation_line_ids.filtered(
             lambda x: x.line_date <= self.date
-            and not x.init_entry
-            and x.move_check
+            and (x.init_entry
+            or x.move_check)
         )
         if filtered:
-            total_value += [x.amount for x in filtered][0]
+            sorted = \
+                filtered.sorted(
+                    key=lambda r: (r.type, r.line_date), reverse=True)[0]
+            total_value = sorted.depreciated_value
 
         return total_value
 
@@ -75,6 +73,10 @@ class Parser(report_sxw.rml_parse):
             no = 1
             for asset in obj_fixed_asset.browse(self.cr, self.uid, asset_ids):
                 convert_dt = datetime.strptime(asset.date_start, "%Y-%m-%d")
+                salvage_value = self.get_salvage_value(asset)
+                total_value = self.get_total_value(asset)
+                asset_value = \
+                    asset.purchase_value - salvage_value - total_value
                 res = {
                     "no": no,
                     "code": asset.code,
@@ -83,9 +85,9 @@ class Parser(report_sxw.rml_parse):
                     "acquisition_value": asset.purchase_value,
                     "start_date": convert_dt.strftime("%d %B %Y"),
                     "age": asset.method_number,
-                    "residual_value": self.get_residual_value(asset),
-                    "total_value": self.get_total_value(asset),
-                    "asset_value": asset.asset_value,
+                    "salvage_value": salvage_value,
+                    "total_value": total_value,
+                    "asset_value": asset_value,
                 }
 
                 self.lines.append(res)
