@@ -40,14 +40,11 @@ class Parser(report_sxw.rml_parse):
     def get_total_value(self, asset):
         total_value = 0.0
         filtered = asset.depreciation_line_ids.filtered(
-            lambda x: x.line_date <= self.date
-            and (x.init_entry
-            or x.move_check)
+            lambda x: x.line_date <= self.date and (x.init_entry or x.move_check)
         )
         if filtered:
-            sorted = \
-                filtered.sorted(
-                    key=lambda r: (r.type, r.line_date), reverse=True)[0]
+            sorteds = filtered.sorted(key=lambda r: (r.type, r.line_date), reverse=True)
+            sorted = sorteds[0]
             total_value = sorted.depreciated_value
 
         return total_value
@@ -55,10 +52,7 @@ class Parser(report_sxw.rml_parse):
     def get_line(self):
         obj_fixed_asset = self.pool.get("account.asset.asset")
 
-        criteria = [
-            ("date_start", "<=", self.date),
-            ("state", "in", ["open", "close"])
-        ]
+        criteria = [("date_start", "<=", self.date), ("state", "in", ["open", "close"])]
 
         if self.asset_category_ids:
             criteria = [
@@ -75,8 +69,7 @@ class Parser(report_sxw.rml_parse):
                 convert_dt = datetime.strptime(asset.date_start, "%Y-%m-%d")
                 salvage_value = self.get_salvage_value(asset)
                 total_value = self.get_total_value(asset)
-                asset_value = \
-                    asset.purchase_value - salvage_value - total_value
+                asset_value = asset.purchase_value - salvage_value - total_value
                 res = {
                     "no": no,
                     "code": asset.code,
