@@ -42,7 +42,7 @@
 <menuitem
             id="menu_fixed_asset_reporting"
             name="Fixed Asset"
-            parent="base.menu_reporting"
+            parent="account.menu_finance_reports"
             sequence="50"
         />
 
