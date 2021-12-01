@@ -46,7 +46,7 @@ class Parser(report_sxw.rml_parse):
         if filtered:
             sorteds = filtered.sorted(key=lambda r: (r.type, r.line_date), reverse=True)
             sorted = sorteds[0]
-            total_value = sorted.depreciated_value
+            total_value = sorted.depreciated_value + sorted.amount
 
         return total_value
 
