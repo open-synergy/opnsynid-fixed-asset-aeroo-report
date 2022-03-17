@@ -1,0 +1,14 @@
+# Do NOT update manually; changes here will be overwritten by Copier
+_commit: f7e9316
+_src_path: gh:open-synergy/ssi-addons-repo-template
+dependency_installation_mode: OCA
+generate_requirements_txt: true
+include_aeroo_report: false
+include_wkhtmltopdf: true
+odoo_version: 11.0
+rebel_module_groups: []
+repo_description: opnsynid-fixed-asset-aeroo-report
+repo_name: opnsynid-fixed-asset-aeroo-report
+repo_slug: opnsynid-fixed-asset-aeroo-report
+travis_apt_packages: []
+travis_apt_sources: []
