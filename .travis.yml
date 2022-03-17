@@ -13,6 +13,13 @@ addons:
   apt:
     packages:
       - expect-dev # provides unbuffer utility
+      - "python-lxml"
+      - "python-simplejson"
+      - "python-serial"
+      - "python-yaml"
+      - "python-cairo"
+      - "cups"
+      - "libcups2-dev"
 
 stages:
   - test
@@ -35,6 +42,12 @@ install:
     https://github.com/simetri-sinergi-id/maintainer-quality-tools.git
     ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
+  - git clone -b 11.0 https://github.com/aeroo/aeroo_reports.git ${HOME}/aeroo_reports
+  - pip install unidecode==1.2.0
+  - pip install pycups==1.9.73
+  - pip install git+https://github.com/adhoc-dev/aeroolib@master-fix-ods
+  - pip install git+https://github.com/edgewall/genshi@stable/0.7.x
+  - pip install git+https://github.com/aeroo/currency2text.git
   - travis_install_nightly
 
 script:
