@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
-# Copyright 2021 OpenSynergy Indonesia
-# Copyright 2021 PT. Simetri Sinergi Indonesia
+# Copyright 2022 OpenSynergy Indonesia
+# Copyright 2022 PT. Simetri Sinergi Indonesia
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import api, fields, models
-from openerp.exceptions import Warning as UserError
-from openerp.tools.translate import _
+from odoo import api, fields, models
+from odoo.exceptions import Warning as UserError
+from odoo.tools.translate import _
 
 
 class WizardFixedAsset(models.TransientModel):
@@ -22,7 +21,7 @@ class WizardFixedAsset(models.TransientModel):
     )
     asset_category_ids = fields.Many2many(
         string="Asset Category",
-        comodel_name="account.asset.category",
+        comodel_name="fixed.asset.category",
         relation="rel_report_fixed_asset_2_category",
         column1="wizard_id",
         column2="asset_category_id",
@@ -36,23 +35,15 @@ class WizardFixedAsset(models.TransientModel):
 
     @api.multi
     def action_print_xls(self):
-        datas = {}
-        datas["form"] = self.read()[0]
-        return {
-            "type": "ir.actions.report.xml",
-            "report_name": "report_fixed_asset_xls",
-            "datas": datas,
-        }
+        data = {"model": "account.asset.asset", "form": self.read()[0]}
+        report_name = "fixed_asset_aeroo_report.report_account_fixedAssetXLS"
+        return self.env.ref(report_name).report_action(self, data=data)
 
     @api.multi
     def action_print_ods(self):
-        datas = {}
-        datas["form"] = self.read()[0]
-        return {
-            "type": "ir.actions.report.xml",
-            "report_name": "report_fixed_asset_ods",
-            "datas": datas,
-        }
+        data = {"model": "account.asset.asset", "form": self.read()[0]}
+        report_name = "fixed_asset_aeroo_report.report_account_fixedAssetODS"
+        return self.env.ref(report_name).report_action(self, data=data)
 
     @api.multi
     def button_print_report(self):
@@ -63,6 +54,7 @@ class WizardFixedAsset(models.TransientModel):
         elif self.output_format == "xls":
             result = self.action_print_xls()
         else:
-            raise UserError(_("No Output Format Selected"))
+            strError = _("No Output Format Selected")
+            raise UserError(strError)
 
         return result
