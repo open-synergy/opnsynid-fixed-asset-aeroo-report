@@ -109,10 +109,18 @@ class Parser(report_sxw.rml_parse):
             "%Y-%m-%d"
         )
         filtered = asset.depreciation_line_ids.filtered(
-            lambda x: x.line_date >= date_start
-            and x.line_date <= date_end
-            and (x.init_entry or x.move_check)
-            and x.type == "depreciate"
+            lambda x: (
+                x.line_date >= date_start
+                and x.line_date <= date_end
+                and x.init_entry
+                and x.type == "depreciate"
+            )
+            or (
+                x.move_id.date >= date_start
+                and x.move_id.date <= date_end
+                and x.move_check
+                and x.type == "depreciate"
+            )
         )
         result = 0.0
         if filtered:
@@ -174,7 +182,7 @@ class Parser(report_sxw.rml_parse):
                     "name": asset.name,
                     "acquisition_value": asset.purchase_value,
                     "start_date": convert_dt.strftime("%d %B %Y"),
-                    "age": asset.method_number,
+                    "age": str(asset.method_number) + " " + asset.method_period,
                     "salvage_value": self._get_asset_value(
                         asset
                     ),  # asset.salvage_value,
