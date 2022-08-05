@@ -182,7 +182,7 @@ class Parser(report_sxw.rml_parse):
                     "name": asset.name,
                     "acquisition_value": asset.purchase_value,
                     "start_date": convert_dt.strftime("%d %B %Y"),
-                    "age": str(asset.method_number) + " " + asset.method_period,
+                    "age": str(asset.method_number) + " " + asset.method_time,
                     "salvage_value": self._get_asset_value(
                         asset
                     ),  # asset.salvage_value,
