@@ -181,6 +181,9 @@ class Parser(report_sxw.rml_parse):
                     "code": asset.code,
                     "name": asset.name,
                     "acquisition_value": asset.purchase_value,
+                    "vendor": asset.partner_id
+                    and asset.partner_id.commercial_partner_id.name
+                    or "-",
                     "start_date": convert_dt.strftime("%d %B %Y"),
                     "age": str(asset.method_number) + " " + asset.method_time,
                     "salvage_value": self._get_asset_value(
