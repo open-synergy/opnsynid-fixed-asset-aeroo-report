@@ -125,8 +125,8 @@ class Parser(report_sxw.rml_parse):
         result = 0.0
         if filtered:
             sorteds = filtered.sorted(key=lambda r: (r.type, r.line_date), reverse=True)
-            sorted = sorteds[0]
-            result = sorted.amount
+            for sorted in sorteds:
+                result += sorted.amount
         return result
 
     def get_category_asset_ids(self):
