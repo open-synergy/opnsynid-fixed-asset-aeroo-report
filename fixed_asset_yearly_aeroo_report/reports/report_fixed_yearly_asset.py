@@ -165,7 +165,7 @@ class Parser(report_sxw.rml_parse):
 
         criteria = [
             ("date_start", "<=", date_end),
-            ("state", "in", ["open", "close"]),
+            ("state", "in", ["open", "close", "removed"]),
             ("category_id", "=", category_id),
         ]
 
