@@ -113,13 +113,13 @@ class Parser(report_sxw.rml_parse):
                 x.line_date >= date_start
                 and x.line_date <= date_end
                 and x.init_entry
-                and x.type == "depreciate"
+                and (x.type == "depreciate" or x.type == "remove")
             )
             or (
                 x.move_id.date >= date_start
                 and x.move_id.date <= date_end
                 and x.move_check
-                and x.type == "depreciate"
+                and (x.type == "depreciate" or x.type == "remove")
             )
         )
         result = 0.0
