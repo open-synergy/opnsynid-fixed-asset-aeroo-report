@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2021 OpenSynergy Indonesia
+     Copyright 2021 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+<data>
+
+<record id="report_account_fixedAssetYearlyODS" model="ir.actions.report">
+    <field name="name">Fixed Asset Yearly ODS</field>
+    <field name="type">ir.actions.report</field>
+    <field name="model">fixed.asset.asset</field>
+    <field name="report_name">report_fixed_asset_yearly_ods</field>
+    <field name="report_type">aeroo</field>
+    <field name="in_format">oo-ods</field>
+    <field name="out_format" ref="report_aeroo.report_mimetypes_ods_ods" />
+    <field
+                name="parser_loc"
+            >fixed_asset_yearly_aeroo_report/reports/report_fixed_yearly_asset.py</field>
+    <field
+                name="report_file"
+            >fixed_asset_yearly_aeroo_report/reports/report_fixed_yearly_asset.ods</field>
+    <field name="parser_state">loc</field>
+    <field name="tml_source">file</field>
+</record>
+</data>
+</odoo>
