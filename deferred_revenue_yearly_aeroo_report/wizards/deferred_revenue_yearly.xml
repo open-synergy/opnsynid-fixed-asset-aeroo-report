@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 OpenSynergy Indonesia
+     Copyright 2021 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+<data>
+
+<record id="deferred_revenue_yearly_view_form" model="ir.ui.view">
+    <field name="name">Print Yearly Deferred Revenue Report</field>
+    <field name="model">deferred_revenue_yearly</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <form>
+            <group col="2" colspan="2">
+                <field name="year" />
+                <field name="category_ids" widget="many2many_tags" />
+                <field name="output_format" widget="radio" />
+            </group>
+            <footer>
+                <button
+                            name="button_print_report"
+                            string="Print"
+                            colspan="1"
+                            type="object"
+                            class="oe_highlight"
+                        />
+                or
+                <button special="cancel" string="_Cancel" class="oe_link" />
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="deferred_revenue_yearly_action" model="ir.actions.act_window">
+    <field name="name">Print Yearly Deferred Revenue Report</field>
+    <field name="res_model">deferred_revenue_yearly</field>
+    <field name="view_type">form</field>
+    <field name="view_id" ref="deferred_revenue_yearly_view_form" />
+    <field name="target">new</field>
+</record>
+
+<menuitem
+            id="deferred_revenue_yearly_menu"
+            name="Yearly Deferred Revenue Report"
+            parent="account.account_reports_management_menu"
+            action="deferred_revenue_yearly_action"
+        />
+
+</data>
+</odoo>
