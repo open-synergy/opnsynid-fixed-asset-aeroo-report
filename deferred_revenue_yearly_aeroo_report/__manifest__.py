@@ -5,7 +5,7 @@
 # pylint: disable=locally-disabled, manifest-required-author
 {
     "name": "Deferred Revenue Yearly report",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.0.1",
     "website": "https://simetri-sinergi.id",
     "author": "PT. Simetri Sinergi Indonesia, OpenSynergy Indonesia",
     "depends": [
