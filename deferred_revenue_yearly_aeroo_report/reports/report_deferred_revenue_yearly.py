@@ -81,7 +81,7 @@ class Parser(models.AbstractModel):
         if filtered:
             sorteds = filtered.sorted(key=lambda r: (r.depreciation_date), reverse=True)
             sorted = sorteds[0]
-            result = sorted.remaining_value
+            result = sorted.depreciated_value
         return result
 
     def _get_dpr_current_year(self, deferred_revenue):
@@ -93,7 +93,7 @@ class Parser(models.AbstractModel):
         if filtered:
             sorteds = filtered.sorted(key=lambda r: (r.depreciation_date), reverse=True)
             sorted = sorteds[0]
-            result = sorted.remaining_value
+            result = sorted.depreciated_value
         return result
 
     # def _get_asset_value(self, asset):
