@@ -14,7 +14,14 @@ opnsynid-fixed-asset-aeroo-report
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[deferred_revenue_aeroo_report](deferred_revenue_aeroo_report/) | 11.0.1.0.0 |  | Deferred Revenue Report
+[deferred_revenue_yearly_aeroo_report](deferred_revenue_yearly_aeroo_report/) | 11.0.1.0.2 |  | Deferred Revenue Yearly report
+[fixed_asset_aeroo_report](fixed_asset_aeroo_report/) | 11.0.1.0.0 |  | Fixed asset report
+[fixed_asset_yearly_aeroo_report](fixed_asset_yearly_aeroo_report/) | 11.0.1.0.0 |  | Fixed Asset Yearly report
 
 [//]: # (end addons)
 
